@@ -1,0 +1,18 @@
+%p#notice= notice
+%h1 Venues
+%table
+  %thead
+    %tr
+      %th Rows
+      %th Columns
+      %th{:colspan => "3"}
+  %tbody
+    - @venues.each do |venue|
+      %tr
+        %td= venue.rows
+        %td= venue.columns
+        %td= link_to 'Show', venue
+        %td= link_to 'Edit', edit_venue_path(venue)
+        %td= link_to 'Destroy', venue, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Venue', new_venue_path

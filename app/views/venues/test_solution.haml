@@ -1,0 +1,13 @@
+%h1 Test Solution
+
+= form_with model: @venue, url: test_solution_venue_path(@venue), method: :post, class: 'solution_form', local: false do |form|
+	= form.label :input_data, 'Solution input JSON:'
+	= form.text_area :input_data, value: solution_input_json(@venue), cols: 250, rows: 30, readonly: true
+	= form.label :requested_group_size, 'Requested group size:'
+	= form.number_field :requested_group_size, value: 1, min: 1, max: @venue.columns
+	= form.submit 'Test solution'
+= label_tag :solution, 'Solution:'
+= text_area_tag :solution, nil, cols: 250, rows: 10, disabled: true, class: 'solution_field'
+
+.actions
+	= link_to 'Back', venue_path(@venue)
