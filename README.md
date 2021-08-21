@@ -28,7 +28,6 @@ Other skills which I have aimed to demonstrate in this project:
 Install the required Ruby gems:
 ```
 $ bundle install
-
 ```
 
 Customize the `config/database.yml` file with the credentials to your development PostgreSQL server.
@@ -36,7 +35,6 @@ Customize the `config/database.yml` file with the credentials to your developmen
 Initialize your development database with:
 ```
 $ bundle exec rails db:create db:migrate
-
 ```
 
 ## Usage
@@ -44,7 +42,6 @@ $ bundle exec rails db:create db:migrate
 Start a Rails server with:
 ```
 $ bundle exec rails server
-
 ```
 
 Then navigate to `localhost:3000`.
@@ -90,5 +87,5 @@ See [RSpec documentation](https://rspec.info/) for more detailed description of 
   + Seat creation: 35 seconds
   + Show page render: 68 seconds
   + Algorithm: 90ms
-  
+
   So the overall algorithm should be efficient enough for the use case.
