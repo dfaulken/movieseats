@@ -2,18 +2,18 @@
 
 A Rails 6 app that implements the technical exercise by allowing users to create venues, view and edit available seats, view the resulting input JSON, specify the desired seat group size, and view the solution output JSON.
 
-The core solution itself takes the form of a Ruby class that could be extracted from the Rails app and used independently.
+The core solution itself takes the form of [a Ruby class](/app/helpers/movie_seats_solver.rb) that could be extracted from the Rails app and used independently.
 
 The Rails app has the following features:
 
 + PostgreSQL backend
 + HAML frontend
 + Small [jQuery component](/app/javascript/packs/testSolution.js) to handle submitting solution input and displaying solution output via AJAX
-+ Complete model, helper, and feature testing written in RSpec with Capybara and FactoryBot
++ Complete [model](/spec/models), [helper](/spec/helpers), and [feature](/spec/features) testing written in RSpec with Capybara and FactoryBot
 
 Other skills which I have aimed to demonstrate in this project:
 
-+ GitHub issue tracking and project management
++ GitHub [issue tracking](https://github.com/dfaulken/movieseats/issues) and [project management](https://github.com/dfaulken/movieseats/projects/1)
 + In-code documentation of low-level design decisions
 + Out-of-code documentation of high-level design decisions
 
@@ -71,4 +71,4 @@ Then run the full test suite with:
 $ bundle exec rspec
 ```
 
-See RSpec documentation for more detailed description of capabilities.
+See [RSpec documentation](https://rspec.info/) for more detailed description of capabilities.
