@@ -67,11 +67,12 @@ class VenuesController < ApplicationController
 
   def test_solution
     if request.post?
-      input_data = JSON.parse(solution_params[:input_data])
-      group_size = solution_params[:requested_group_size].to_i
       solver = MovieSeatsSolver.new
-      solution = solver.solve input_data, requested_group_size: group_size
-      render json: solution, status: :ok
+      solver.input_data = JSON.parse(solution_params[:input_data])
+      solver.parse_input_data!
+      solver.requested_group_size = solution_params[:requested_group_size].to_i
+      solver.solve!
+      render json: solver.solution_json_data, status: :ok
     end
   end
 

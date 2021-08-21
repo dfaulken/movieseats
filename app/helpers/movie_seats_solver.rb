@@ -3,23 +3,27 @@ class MovieSeatsSolver
 	AVAILABLE_STATUS = 'AVAILABLE'.freeze
 	ROW_LETTERS = %[a b c d e f g h i j k l m n o p q r s t u v w x y x].freeze
 
-	def solve(data, requested_group_size: 1)
+	attr_accessor :input_data
+	attr_accessor :requested_group_size
+	attr_accessor :venue
+	attr_accessor :seat_groups
+	attr_accessor :best_group
+
+	def parse_input_data!
 		venue = Venue.new
-		layout = data.fetch('venue').fetch('layout')
+		layout = input_data.fetch('venue').fetch('layout')
 		venue.rows = layout.fetch('rows')
 		venue.columns = layout.fetch('columns')
+		self.venue = venue
 		
 		seat_groups = []
-		original_seat_data = {}
-		seats_data = data.fetch('seats').values
+		seats_data = input_data.fetch('seats').values
 		seats_data.each do |seat_data|
 			if seat_data.fetch('status') == AVAILABLE_STATUS
 				seat = Seat.new
 				seat.row = row_number seat_data.fetch('row')
 				seat.column = seat_data.fetch 'column'
 				seat.id = seat_data.fetch 'id'
-				# Retain original data for use in return value.
-				original_seat_data[seat.id] = seat_data
 				# Is this seat part of a group?
 				last_group = seat_groups.last
 				last_seat = last_group&.last
@@ -29,7 +33,15 @@ class MovieSeatsSolver
 				end
 			end
 		end
+		self.seat_groups = seat_groups
+	end
 
+	def solution_json_data
+		return {} unless best_group
+		input_data['seats'].slice *(best_group.map(&:id))
+	end
+
+	def solve!
 		# Mapping larger groups to all sub-groups of requested size
 		# (and discarding groups of insufficient size)
 		# could be done as part of the first iteration.
@@ -46,15 +58,12 @@ class MovieSeatsSolver
 			end
 		end
 
-		best_group = requested_size_groups.sort_by do |group|
+		self.best_group = requested_size_groups.sort_by do |group|
 			group_row = group.first.row
 			group_average_column = Rational(group.sum(&:column), group.size) # avoid floating point issues
 			venue.distance_to_front_and_center_from group_row, group_average_column
 		end.first || []
-		original_seat_data.slice *(best_group.map(&:id))
 	end
-
-	private
 
 	def row_number(row_code)
 		letter = row_code.first
