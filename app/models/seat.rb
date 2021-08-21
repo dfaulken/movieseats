@@ -1,7 +1,7 @@
 class Seat < ApplicationRecord
 	belongs_to :venue
-	validates :row, presence: true, numericality: { greater_than: 0, less_than: 53 }
-	validates :column, presence: true, numericality: { greater_than: 0, less_than: 53 }
+	validates :row, presence: true, numericality: { greater_than: 0 }
+	validates :column, presence: true, numericality: { greater_than: 0 }
 	validates :available, inclusion: { in: [true, false] } # disallow nil
 
 	LETTERS = %w[A B C D E F G H I J K L M N O P Q R S T U V W X Y Z].freeze
@@ -17,12 +17,10 @@ class Seat < ApplicationRecord
 	end
 
 	def row_letter
-		letter = LETTERS[(row % 26) - 1]
-		if row <= 26
-			letter
-		else
-			letter * 2
-		end
+		letter_count, letter_index = row.divmod LETTERS.count
+		letter = LETTERS[letter_index - 1]
+		letter_count += 1
+		letter * letter_count
 	end
 
 	def status

@@ -51,9 +51,7 @@ class MovieSeatsSolver
 			group_average_column = Rational(group.sum(&:column), group.size) # avoid floating point issues
 			venue.distance_to_front_and_center_from group_row, group_average_column
 		end.first || []
-		best_group.map do |seat|
-			original_seat_data[seat.id]
-		end
+		original_seat_data.slice *(best_group.map(&:id))
 	end
 
 	private
