@@ -90,4 +90,5 @@ See [RSpec documentation](https://rspec.info/) for more detailed description of 
   + Seat creation: 35 seconds
   + Show page render: 68 seconds
   + Algorithm: 90ms
+  
   So the overall algorithm should be efficient enough for the use case.
