@@ -7,7 +7,7 @@ class Seat < ApplicationRecord
 	LETTERS = %w[A B C D E F G H I J K L M N O P Q R S T U V W X Y Z].freeze
 
 	AVAILABLE_STATUS = 'AVAILABLE'.freeze
-	NOT_AVAILABLE_STATUS = 'NOT AVAILABLE'.freeze
+	UNAVAILABLE_STATUS = 'NOT AVAILABLE'.freeze
 
 	default_scope { order :row, :column }
 	scope :at, -> (row, column) { where row: row, column: column }
@@ -17,16 +17,14 @@ class Seat < ApplicationRecord
 	end
 
 	def row_letter
-		letter_count, letter_index = row.divmod LETTERS.count
-		letter = LETTERS[letter_index - 1]
-		letter_count += 1
-		letter * letter_count
+		count, index = (row - 1 + LETTERS.count).divmod LETTERS.count
+		LETTERS[index] * count
 	end
 
 	def status
 		if available?
 			AVAILABLE_STATUS
-		else NOT_AVAILABLE_STATUS
+		else UNAVAILABLE_STATUS
 		end
 	end
 end
