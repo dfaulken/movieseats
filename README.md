@@ -8,7 +8,7 @@ The Rails app has the following features:
 
 + PostgreSQL backend
 + HAML frontend
-+ Small [jQuery component](/blob/main/app/javascript/packs/testSolution.js) to handle submitting solution input and displaying solution output via AJAX
++ Small [jQuery component](/app/javascript/packs/testSolution.js) to handle submitting solution input and displaying solution output via AJAX
 + Complete model, helper, and feature testing written in RSpec with Capybara and FactoryBot
 
 Other skills which I have aimed to demonstrate in this project:
