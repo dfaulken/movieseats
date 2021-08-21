@@ -9,7 +9,7 @@ RSpec.feature 'Listing venues', type: :feature do
 		create :venue
 		visit '/venues'
 		expect(page).to have_css 'table'
-		expect(page).to have_css('tbody tr'), count: 1
+		expect(page).to have_css('tbody tr', count: 1)
 		expect(page).to have_text 'Show'
 		expect(page).to have_text 'Edit'
 		expect(page).to have_text 'Destroy'
