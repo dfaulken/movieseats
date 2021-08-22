@@ -66,8 +66,6 @@ Run the full test suite with:
 $ bundle exec rspec
 ```
 
-See [RSpec documentation](https://rspec.info/) for more detailed description of capabilities.
-
 Run the RuboCop Ruby linter with:
 ```
 $ bundle exec rails rubocop
