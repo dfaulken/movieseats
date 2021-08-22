@@ -21,6 +21,19 @@ RSpec.describe 'Venue', type: :model do
 		expect(venue.seats.where(available: false).count).to eq 25
 	end
 
+	describe 'free_sample_seat_group' do
+		it 'frees up a seat group of requested size' do
+			10.times do
+				venue = create :venue, rows: 5, columns: 5
+				venue.free_sample_seat_group size: 3
+				free_seats = venue.seats.available
+				expect(free_seats.count).to eq 3
+				expect(free_seats.pluck(:row).uniq.count).to eq 1
+				expect(free_seats.pluck(:column).max - free_seats.pluck(:column).min).to eq 2
+			end
+		end
+	end
+
 	describe 'seat_index' do
 		let(:venue) { create :venue, rows: 3, columns: 3 }
 		it 'returns 0-indexed position of seat at 1-indexed row and column in seats ordered by row and column' do

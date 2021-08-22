@@ -11,6 +11,9 @@ class Seat < ApplicationRecord
 
 	default_scope { order :row, :column }
 
+	scope :available, -> { where available: true }
+	scope :unavailable, -> { where.not available: true }
+
 	def name
 		"#{row_letter}#{column}"
 	end

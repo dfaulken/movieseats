@@ -4,6 +4,13 @@ class Venue < ApplicationRecord
 	validates :columns, presence: true, numericality: { greater_than: 0 }
 	after_create :populate_seats!
 
+	def free_sample_seat_group(size:)
+		row = rand(rows) + 1
+		start_column = rand(columns - size) + 1
+		end_column = start_column + size
+		seats.where(row: row, column: start_column...end_column).update_all available: true
+	end
+
 	# output is 0-indexed, inputs are 1-indexed
 	def seat_index(row, column)
 		(row - 1) * columns + (column - 1)
