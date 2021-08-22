@@ -1,7 +1,7 @@
 class MovieSeatsSolver
 
   AVAILABLE_STATUS = 'AVAILABLE'.freeze
-  ROW_LETTERS = %w[a b c d e f g h i j k l m n o p q r s t u v w x x y z].freeze
+  ROW_LETTERS = %w[a b c d e f g h i j k l m n o p q r s t u v w x y z].freeze
 
   attr_accessor :input_data
   attr_accessor :requested_group_size

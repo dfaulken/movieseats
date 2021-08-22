@@ -20,8 +20,6 @@ ActiveRecord::Schema.define(version: 2021_08_19_142349) do
     t.integer "row"
     t.integer "column"
     t.boolean "available"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "venues", force: :cascade do |t|

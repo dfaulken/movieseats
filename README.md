@@ -21,6 +21,7 @@ Other skills which I have aimed to demonstrate in this project:
 1. Ruby >2.3 (the newest Ruby feature that I believe I use is the safe navigation operator `&.`)
 1. Bundler gem installed in your Ruby version of choice
 1. PostgreSQL server
+1. Node.js (for npm)
 1. Chromedriver (for JS-dependent feature specs)
 
 ## Installation
@@ -30,11 +31,12 @@ Install the required Ruby gems:
 $ bundle install
 ```
 
-Customize the `config/database.yml` file with the credentials to your development PostgreSQL server.
+Customize the `config/database.yml` file with the credentials to your development and test PostgreSQL servers.
 
-Initialize your development database with:
+Initialize your development and test databases with:
 ```
-$ bundle exec rails db:create db:migrate
+$ bundle exec rails db:create db:schema:load
+$ bundle exec rails db:schema:load RAILS_ENV=test
 ```
 
 ## Usage
@@ -55,13 +57,7 @@ Recommended testing steps include:
 
 ## Testing
 
-Initialize the testing database with:
-
-```
-$ bundle exec rails db:create db:migrate RAILS_ENV=test
-```
-
-Then run the full test suite with:
+Run the full test suite with:
 
 ```
 $ bundle exec rspec
@@ -77,15 +73,15 @@ See [RSpec documentation](https://rspec.info/) for more detailed description of 
   In the end, because my professional experience has been entirely with relational databases, I chose not to go that route, since the purpose of this project was to demonstrate the capabilities that I *do* have. However, if I were implementing this as a side project for fun, I would almost certainly go the NoSQL route.
 + Venues are handled via CRUD, whereas seats (once initialized) are just fancy booleans, so a single API endpoint handles toggling their status.
 + Since I am more of a middle- and back-end developer by trade, I chose to focus my effort on those areas. The frontend is meant to be sufficient to show the functionality of the rest of the application, but nothing more than that.
++ The algorithm itself ultimately relies on calculating the distance between individual seats and the ideal front-and-center point. I chose this approach because in the real world, not all concert venues are laid out into perfect rows and columns. The approach could be easily adapted to accommodate a coordinates-based approach for representing more complicated seat layouts.
 + I spent about as much time implementing the tests as I did implementing the solution. It is definitely possible to go into more detail testing edge and corner cases. However, even these few tests (less than 40 examples total) were enough to catch out a simple error that I made early in the implementation, so I think they are also enough to demonstrate basic testing best practices.
 
 ### What does this app *not* do?
 
 + See the issues page for my documentation of the things that it occurred to me during development might be some nice-to-haves.
 + Other than the scalability concern of the relational backend discussed above, there is obviously a scaling risk for the frontend (many, many checkboxes), and the algorithm itself could be optimized as well (I commented in the code about this). However the algorithm is the main task at hand, and should be relatively efficient for real-world-sized audience-holding venues where a customer might want to be close to the front (on order of 100,000 seats).
-+ I tested a 100x100 venue where every seat is available and the requested group size is 1, which is about an order of magnitude smaller than the worst real-world case (the Narendra Modi stadium in Ahmedabad, Gujarat, India has a seating capacity of 132,000). The performance running locally on my laptop was as follows:
-  + Seat creation: 35 seconds
-  + Show page render: 68 seconds
-  + Algorithm: 90ms
++ I tested a 360x360 venue where every seat is available and the requested group size is 1, which is on the order of the worst real-world case (the Narendra Modi stadium in Ahmedabad, Gujarat, India has a seating capacity of 132,000). The performance running locally on my laptop was as follows:
+  + Creation PUT request response time: 3902 ms (ActiveRecord: 843.5 ms)
+  + Algorithm solve request response time: 2307 ms (most of which was just the data structure being transmitted back and forth)
 
   So the overall algorithm should be efficient enough for the use case.

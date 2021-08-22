@@ -10,7 +10,6 @@ class Seat < ApplicationRecord
 	UNAVAILABLE_STATUS = 'NOT AVAILABLE'.freeze
 
 	default_scope { order :row, :column }
-	scope :at, -> (row, column) { where row: row, column: column }
 
 	def name
 		"#{row_letter}#{column}"

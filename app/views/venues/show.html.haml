@@ -11,7 +11,7 @@
     %tr
       - 1.upto(@venue.columns).each do |column|
         %td
-          - seat = @seats.at(row, column).first
+          - seat = @venue.seats[@venue.seat_index row, column]
           = seat.name
           = form_with scope: seat, url: update_seat_venue_path(@venue) do |form|
             = form.hidden_field :id, value: seat.id

@@ -5,8 +5,6 @@ class CreateSeats < ActiveRecord::Migration[6.1]
       t.integer :row
       t.integer :column
       t.boolean :available
-
-      t.timestamps
     end
   end
 end
