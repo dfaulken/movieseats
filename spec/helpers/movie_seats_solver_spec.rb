@@ -64,6 +64,24 @@ RSpec.describe MovieSeatsSolver do
       expect(solver.seat_groups.count).to eq 1
     end
 
+    it 'is not dependent on input order' do
+      solver.input_data = {
+        venue: {
+          layout: { rows: 2, columns: 3 }
+        },
+        seats: {
+          seat_id1: { id: 'seat_id1', row: 'a', column: 1, status: 'AVAILABLE' },
+          seat_id3: { id: 'seat_id3', row: 'a', column: 3, status: 'NOT AVAILABLE' },
+          seat_id6: { id: 'seat_id6', row: 'b', column: 3, status: 'AVAILABLE' },
+          seat_id4: { id: 'seat_id4', row: 'b', column: 1, status: 'NOT AVAILABLE' },
+          seat_id2: { id: 'seat_id2', row: 'a', column: 2, status: 'AVAILABLE' },
+          seat_id5: { id: 'seat_id5', row: 'b', column: 2, status: 'NOT AVAILABLE' }
+        }
+      }.deep_stringify_keys
+      solver.parse_input_data!
+      expect(solver.seat_groups.count).to eq 2
+    end
+
     it 'does not group seats in different rows together' do
       solver.input_data = {
         venue: {

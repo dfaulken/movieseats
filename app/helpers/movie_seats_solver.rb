@@ -22,20 +22,33 @@ class MovieSeatsSolver
     seat
   end
 
+  def group_seats(seats)
+    groups = []
+    seats.each do |seat|
+      if seat.next_to? groups.last&.last
+        groups.last << seat
+      else groups << [seat]
+      end
+    end
+    groups
+  end
+
+  def sort_seats(seats)
+    seats.sort_by do |seat|
+      venue.seat_index seat
+    end
+  end
+
   def parse_input_data!
     self.venue = parse_venue(input_data.fetch('venue'))
 
-    self.seat_groups = []
+    seats = []
     input_data.fetch('seats').each_value do |seat_data|
       next unless seat_data.fetch('status') == AVAILABLE_STATUS
 
-      seat = parse_seat(seat_data)
-      # Is this seat part of a group?
-      if seat.next_to? seat_groups.last&.last
-        seat_groups.last << seat
-      else seat_groups << [seat]
-      end
+      seats << parse_seat(seat_data)
     end
+    self.seat_groups = group_seats(sort_seats(seats))
   end
 
   def solution_json_data
@@ -94,6 +107,10 @@ class MovieSeatsSolver
       forward_distance = row - 1 # front row is always 1
       side_distance = column - center_column_number
       Math.sqrt(forward_distance.abs2 + side_distance.abs2) # Thanks, Pythagoras
+    end
+
+    def seat_index(seat)
+      columns * seat.row + seat.column
     end
   end
 

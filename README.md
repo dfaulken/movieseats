@@ -82,7 +82,7 @@ $ bundle exec rails rubocop
 + Venues are handled via CRUD, whereas seats (once initialized) are just fancy booleans, so a single API endpoint handles toggling their status.
 + Since I am more of a middle- and back-end developer by trade, I chose to focus my effort on those areas. The frontend is meant to be sufficient to show the functionality of the rest of the application, but nothing more than that.
 + The algorithm itself ultimately relies on calculating the distance between individual seats and the ideal front-and-center point. I chose this approach because in the real world, not all concert venues are laid out into perfect rows and columns. The approach could be easily adapted to accommodate a coordinates-based approach for representing more complicated seat layouts.
-+ I spent about as much time implementing the tests as I did implementing the solution. It is definitely possible to go into more detail testing edge and corner cases. However, even these few tests (less than 40 examples total) were enough to catch out a simple error that I made early in the implementation, so I think they are also enough to demonstrate basic testing best practices.
++ I spent about as much time implementing the tests as I did implementing the solution. It is definitely possible to go into more detail testing edge and corner cases. However, even these few tests (around 40 examples total) were enough to catch out a simple error that I made early in the implementation, so I think they are also enough to demonstrate basic testing best practices.
 
 ### What does this app *not* do?
 
