@@ -15,6 +15,6 @@ module VenuesHelper
 
   def percentage_available_seats(venue)
     percentage = 100 * venue.seats.available.count / venue.seats.count.to_f
-    '%.2f%%'.format percentage
+    '%.2f%%' % percentage
   end
 end
