@@ -1,5 +1,3 @@
-inherit_from: .rubocop_todo.yml
-
 AllCops:
   NewCops: enable
 
@@ -14,6 +12,15 @@ Layout/LineLength:
     - 'config/environments/*'
     - 'config/initializers/*'
     - 'config/puma.rb'
+
+# I'm okay with *slightly* more stuff going on in a method.
+Metrics/AbcSize:
+  Max: 25
+
+# Tests have long blocks.
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*.rb'
 
 # I don't want timestamps.
 Rails/CreateTableWithTimestamps:

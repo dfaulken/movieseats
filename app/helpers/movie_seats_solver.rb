@@ -6,31 +6,36 @@ class MovieSeatsSolver
 
   attr_accessor :input_data, :requested_group_size, :venue, :seat_groups, :best_group
 
-  def parse_input_data!
+  def parse_venue(venue_data)
     venue = Venue.new
-    layout = input_data.fetch('venue').fetch('layout')
+    layout = venue_data.fetch('layout')
     venue.rows = layout.fetch('rows')
     venue.columns = layout.fetch('columns')
-    self.venue = venue
+    venue
+  end
 
-    seat_groups = []
-    seats_data = input_data.fetch('seats').values
-    seats_data.each do |seat_data|
+  def parse_seat(seat_data)
+    seat = Seat.new
+    seat.row = row_number seat_data.fetch('row')
+    seat.column = seat_data.fetch 'column'
+    seat.id = seat_data.fetch 'id'
+    seat
+  end
+
+  def parse_input_data!
+    self.venue = parse_venue(input_data.fetch('venue'))
+
+    self.seat_groups = []
+    input_data.fetch('seats').each_value do |seat_data|
       next unless seat_data.fetch('status') == AVAILABLE_STATUS
 
-      seat = Seat.new
-      seat.row = row_number seat_data.fetch('row')
-      seat.column = seat_data.fetch 'column'
-      seat.id = seat_data.fetch 'id'
+      seat = parse_seat(seat_data)
       # Is this seat part of a group?
-      last_group = seat_groups.last
-      last_seat = last_group&.last
-      if seat.next_to? last_seat
-        last_group << seat
+      if seat.next_to? seat_groups.last&.last
+        seat_groups.last << seat
       else seat_groups << [seat]
       end
     end
-    self.seat_groups = seat_groups
   end
 
   def solution_json_data
@@ -39,24 +44,32 @@ class MovieSeatsSolver
     input_data['seats'].slice(*best_group.map(&:id))
   end
 
-  def solve!
+  def requested_size_subgroups(group)
+    return [group] if group.size == requested_group_size
+
+    subgroup_count = group.size - requested_group_size
+    (0...subgroup_count).map do |subgroup_starting_index|
+      group.slice(subgroup_starting_index, requested_group_size)
+    end
+  end
+
+  def size_seat_groups!
     # Mapping larger groups to all sub-groups of requested size
     # (and discarding groups of insufficient size)
     # could be done as part of the first iteration.
     # This is a refactor target if more efficiency is needed.
     requested_size_groups = []
     seat_groups.each do |group|
-      if group.size == requested_group_size
-        requested_size_groups << group
-      elsif group.size > requested_group_size
-        subgroup_count = group.size - requested_group_size
-        (0...subgroup_count).each do |subgroup_starting_index|
-          requested_size_groups << group.slice(subgroup_starting_index, requested_group_size)
-        end
+      unless group.size < requested_group_size
+        requested_size_groups += requested_size_subgroups(group)
       end
     end
+    self.seat_groups = requested_size_groups
+  end
 
-    self.best_group = requested_size_groups.min_by do |group|
+  def solve!
+    size_seat_groups!
+    self.best_group = seat_groups.min_by do |group|
       group_row = group.first.row
       group_average_column = Rational(group.sum(&:column), group.size) # avoid floating point issues
       venue.distance_to_front_and_center_from group_row, group_average_column
