@@ -20,7 +20,7 @@ Other skills which I have aimed to demonstrate in this project:
 
 ## Dependencies
 
-1. Ruby >2.3 (the newest Ruby feature that I believe I use is the safe navigation operator `&.`)
+1. Ruby >2.3 (I believe that the newest Ruby feature that I use is the safe navigation operator `&.`)
 1. Bundler gem installed in your Ruby version of choice
 1. PostgreSQL server
 1. Node.js (for npm)
