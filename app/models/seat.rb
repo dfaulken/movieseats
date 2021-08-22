@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Seat < ApplicationRecord
   belongs_to :venue
   validates :row, presence: true, numericality: { greater_than: 0 }
@@ -6,8 +8,8 @@ class Seat < ApplicationRecord
 
   LETTERS = %w[A B C D E F G H I J K L M N O P Q R S T U V W X Y Z].freeze
 
-  AVAILABLE_STATUS = 'AVAILABLE'.freeze
-  UNAVAILABLE_STATUS = 'NOT AVAILABLE'.freeze
+  AVAILABLE_STATUS = 'AVAILABLE'
+  UNAVAILABLE_STATUS = 'NOT AVAILABLE'
 
   default_scope { order :row, :column }
 

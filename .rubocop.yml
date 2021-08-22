@@ -2,3 +2,71 @@ inherit_from: .rubocop_todo.yml
 
 AllCops:
   NewCops: enable
+
+# Meh
+Layout/EndOfLine:
+  Enabled: false
+
+Layout/LineLength:
+  Max: 100
+  # Don't care about boilerplate.
+  Exclude:
+    - 'config/environments/*'
+    - 'config/initializers/*'
+    - 'config/puma.rb'
+
+# I don't want timestamps.
+Rails/CreateTableWithTimestamps:
+  Exclude:
+    - 'db/migrate/20210819142349_create_seats.rb'
+
+# Don't care about boilerplate.
+Rails/FilePath:
+  Exclude:
+    - 'config/environments/development.rb'
+
+# Too much duplication of effort to accommodate this. It's clear when one expectation fails vs. another within a single example.
+RSpec/MultipleExpectations:
+  Enabled: false
+
+# Same here.
+RSpec/ExampleLength:
+  Max: 50
+
+# It's a Rails app. We don't need to explain what each controller *is*.
+Style/Documentation:
+  Enabled: false
+
+# I think % is fine.
+Style/FormatString:
+  Enabled: false
+
+# A controller method wrapped in `if request.post?` is *not* identical to starting it with `return unless request.post?`.
+# Controller methods have different control flow.
+Style/GuardClause:
+  Exclude:
+    - 'app/controllers/*'
+
+# I think it reads more consistently with the rest of the method.
+Style/RedundantReturn:
+  Exclude:
+    - 'app/helpers/movie_seats_solver.rb'
+
+# Don't care about boilerplate.
+Style/RedundantFetchBlock:
+  Exclude:
+    - 'config/puma.rb'
+
+# Don't care about boilerplate.
+Style/StringLiterals:
+  Exclude:
+    - 'Rakefile'
+    - 'config.ru'
+    - 'config/application.rb'
+    - 'config/boot.rb'
+    - 'config/environment.rb'
+    - 'config/environments/development.rb'
+    - 'config/environments/production.rb'
+    - 'config/environments/test.rb'
+    - 'config/initializers/backtrace_silencers.rb'
+    - 'config/puma.rb'

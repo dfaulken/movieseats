@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class MovieSeatsSolver
-  AVAILABLE_STATUS = 'AVAILABLE'.freeze
+  AVAILABLE_STATUS = 'AVAILABLE'
   ROW_LETTERS = %w[a b c d e f g h i j k l m n o p q r s t u v w x y z].freeze
 
   attr_accessor :input_data, :requested_group_size, :venue, :seat_groups, :best_group
@@ -14,18 +16,18 @@ class MovieSeatsSolver
     seat_groups = []
     seats_data = input_data.fetch('seats').values
     seats_data.each do |seat_data|
-      if seat_data.fetch('status') == AVAILABLE_STATUS
-        seat = Seat.new
-        seat.row = row_number seat_data.fetch('row')
-        seat.column = seat_data.fetch 'column'
-        seat.id = seat_data.fetch 'id'
-        # Is this seat part of a group?
-        last_group = seat_groups.last
-        last_seat = last_group&.last
-        if seat.next_to? last_seat
-          last_group << seat
-        else seat_groups << [seat]
-        end
+      next unless seat_data.fetch('status') == AVAILABLE_STATUS
+
+      seat = Seat.new
+      seat.row = row_number seat_data.fetch('row')
+      seat.column = seat_data.fetch 'column'
+      seat.id = seat_data.fetch 'id'
+      # Is this seat part of a group?
+      last_group = seat_groups.last
+      last_seat = last_group&.last
+      if seat.next_to? last_seat
+        last_group << seat
+      else seat_groups << [seat]
       end
     end
     self.seat_groups = seat_groups
@@ -34,7 +36,7 @@ class MovieSeatsSolver
   def solution_json_data
     return {} unless best_group
 
-    input_data['seats'].slice(*(best_group.map(&:id)))
+    input_data['seats'].slice(*best_group.map(&:id))
   end
 
   def solve!
@@ -54,11 +56,11 @@ class MovieSeatsSolver
       end
     end
 
-    self.best_group = requested_size_groups.sort_by do |group|
+    self.best_group = requested_size_groups.min_by do |group|
       group_row = group.first.row
       group_average_column = Rational(group.sum(&:column), group.size) # avoid floating point issues
       venue.distance_to_front_and_center_from group_row, group_average_column
-    end.first || []
+    end || []
   end
 
   def row_number(row_code)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class VenuesController < ApplicationController
   before_action :set_venue, only: %i[
     show edit update destroy update_seat
@@ -10,8 +12,7 @@ class VenuesController < ApplicationController
   end
 
   # GET /venues/1 or /venues/1.json
-  def show
-  end
+  def show; end
 
   # GET /venues/new
   def new
@@ -19,8 +20,7 @@ class VenuesController < ApplicationController
   end
 
   # GET /venues/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /venues or /venues.json
   def create
@@ -28,7 +28,7 @@ class VenuesController < ApplicationController
 
     respond_to do |format|
       if @venue.save
-        format.html { redirect_to @venue, notice: "Venue was successfully created." }
+        format.html { redirect_to @venue, notice: 'Venue was successfully created.' }
         format.json { render :show, status: :created, location: @venue }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -41,7 +41,7 @@ class VenuesController < ApplicationController
   def update
     respond_to do |format|
       if @venue.update(venue_params)
-        format.html { redirect_to @venue, notice: "Venue was successfully updated." }
+        format.html { redirect_to @venue, notice: 'Venue was successfully updated.' }
         format.json { render :show, status: :ok, location: @venue }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -54,7 +54,7 @@ class VenuesController < ApplicationController
   def destroy
     @venue.destroy
     respond_to do |format|
-      format.html { redirect_to venues_url, notice: "Venue was successfully destroyed." }
+      format.html { redirect_to venues_url, notice: 'Venue was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -62,7 +62,7 @@ class VenuesController < ApplicationController
   def update_seat
     seat_params = params.require(:seat).permit(:id, :available)
     @seat = @venue.seats.find(seat_params[:id])
-    if @seat && @seat.update(available: seat_params[:available])
+    if @seat&.update(available: seat_params[:available])
       redirect_to @venue, notice: 'Seat updated.'
     else redirect_to @venue, notice: 'Seat update failed.'
     end

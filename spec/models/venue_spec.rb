@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Venue', type: :model do
@@ -37,10 +39,10 @@ RSpec.describe 'Venue', type: :model do
   describe 'seat_index' do
     let(:venue) { create :venue, rows: 3, columns: 3 }
 
-    it 'returns 0-indexed position of seat at 1-indexed row and column in seats ordered by row and column' do
-      expect(venue.seat_index 1, 1).to eq 0
-      expect(venue.seat_index 2, 1).to eq 3
-      expect(venue.seat_index 3, 3).to eq 8
+    it 'returns 0-indexed position of seat at 1-indexed row and column in seats ordered by row and column' do # rubocop:disable Layout/LineLength
+      expect(venue.seat_index(1, 1)).to eq 0
+      expect(venue.seat_index(2, 1)).to eq 3
+      expect(venue.seat_index(3, 3)).to eq 8
     end
   end
 end

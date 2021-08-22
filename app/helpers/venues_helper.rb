@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module VenuesHelper
   def solution_input_json(venue)
     data = {}
@@ -13,6 +15,6 @@ module VenuesHelper
 
   def percentage_available_seats(venue)
     percentage = 100 * venue.seats.available.count / venue.seats.count.to_f
-    '%.2f%%' % percentage
+    '%.2f%%'.format percentage
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe VenuesHelper do
@@ -47,27 +49,27 @@ RSpec.describe VenuesHelper do
   end
 
   describe 'percentage_available_seats' do
-    it 'gives available seats as a two-decimal precision percentage with trailing zeroes but not leading zeroes' do
+    it 'gives available seats as a two-decimal precision percentage with trailing zeroes but not leading zeroes' do # rubocop:disable Layout/LineLength
       venue = create :venue, rows: 2, columns: 3
-      expect(percentage_available_seats venue).to eq '0.00%'
+      expect(percentage_available_seats(venue)).to eq '0.00%'
 
       venue.seats.unavailable.first.update available: true
-      expect(percentage_available_seats venue).to eq '16.67%'
+      expect(percentage_available_seats(venue)).to eq '16.67%'
 
       venue.seats.unavailable.first.update available: true
-      expect(percentage_available_seats venue).to eq '33.33%'
+      expect(percentage_available_seats(venue)).to eq '33.33%'
 
       venue.seats.unavailable.first.update available: true
-      expect(percentage_available_seats venue).to eq '50.00%'
+      expect(percentage_available_seats(venue)).to eq '50.00%'
 
       venue.seats.unavailable.first.update available: true
-      expect(percentage_available_seats venue).to eq '66.67%'
+      expect(percentage_available_seats(venue)).to eq '66.67%'
 
       venue.seats.unavailable.first.update available: true
-      expect(percentage_available_seats venue).to eq '83.33%'
+      expect(percentage_available_seats(venue)).to eq '83.33%'
 
       venue.seats.unavailable.first.update available: true
-      expect(percentage_available_seats venue).to eq '100.00%'
+      expect(percentage_available_seats(venue)).to eq '100.00%'
     end
   end
 end

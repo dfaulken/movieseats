@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe MovieSeatsSolver do
@@ -23,7 +25,7 @@ RSpec.describe MovieSeatsSolver do
           seat_id3: { id: 'seat_id3', row: 'a', column: 3, status: 'NOT AVAILABLE' },
           seat_id4: { id: 'seat_id4', row: 'b', column: 1, status: 'NOT AVAILABLE' },
           seat_id5: { id: 'seat_id5', row: 'b', column: 2, status: 'NOT AVAILABLE' },
-          seat_id6: { id: 'seat_id6', row: 'b', column: 3, status: 'NOT AVAILABLE' },
+          seat_id6: { id: 'seat_id6', row: 'b', column: 3, status: 'NOT AVAILABLE' }
         }
       }.deep_stringify_keys
       expect { solver.parse_input_data! }.not_to raise_error
@@ -55,7 +57,7 @@ RSpec.describe MovieSeatsSolver do
           seat_id3: { id: 'seat_id3', row: 'a', column: 3, status: 'NOT AVAILABLE' },
           seat_id4: { id: 'seat_id4', row: 'b', column: 1, status: 'NOT AVAILABLE' },
           seat_id5: { id: 'seat_id5', row: 'b', column: 2, status: 'NOT AVAILABLE' },
-          seat_id6: { id: 'seat_id6', row: 'b', column: 3, status: 'NOT AVAILABLE' },
+          seat_id6: { id: 'seat_id6', row: 'b', column: 3, status: 'NOT AVAILABLE' }
         }
       }.deep_stringify_keys
       solver.parse_input_data!
@@ -73,7 +75,7 @@ RSpec.describe MovieSeatsSolver do
           seat_id3: { id: 'seat_id3', row: 'a', column: 3, status: 'AVAILABLE' },
           seat_id4: { id: 'seat_id4', row: 'b', column: 1, status: 'AVAILABLE' },
           seat_id5: { id: 'seat_id5', row: 'b', column: 2, status: 'NOT AVAILABLE' },
-          seat_id6: { id: 'seat_id6', row: 'b', column: 3, status: 'NOT AVAILABLE' },
+          seat_id6: { id: 'seat_id6', row: 'b', column: 3, status: 'NOT AVAILABLE' }
         }
       }.deep_stringify_keys
       solver.parse_input_data!
@@ -82,7 +84,7 @@ RSpec.describe MovieSeatsSolver do
   end
 
   describe 'solution_json_data' do
-    context 'solve has happened' do
+    context 'when solve has happened' do
       it 'returns the input data for the seats in the solution' do
         seat1 = MovieSeatsSolver::Seat.new
         seat1.row = 3
@@ -109,9 +111,10 @@ RSpec.describe MovieSeatsSolver do
         expect(result[seat2.id]).to eq({ 'seat2_data' => true })
       end
     end
-    context 'solve has not happened' do
+
+    context 'when solve has not happened' do
       it 'returns an empty hash' do
-        expect(solver.solution_json_data).to eq Hash.new
+        expect(solver.solution_json_data).to eq({})
       end
     end
   end
@@ -124,7 +127,7 @@ RSpec.describe MovieSeatsSolver do
       solver.venue = venue
     end
 
-    context 'requested group size is 1' do
+    context 'when requested group size is 1' do
       before do
         solver.requested_group_size = 1
       end
@@ -169,7 +172,8 @@ RSpec.describe MovieSeatsSolver do
         expect(solver.best_group).to eql [seat2]
       end
     end
-    context 'requested group size is greater than 1' do
+
+    context 'when requested group size is greater than 1' do
       before do
         solver.requested_group_size = 2
       end

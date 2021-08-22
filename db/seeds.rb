@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 row_values = 10.upto(20).to_a
 column_values = 20.upto(50).to_a
 

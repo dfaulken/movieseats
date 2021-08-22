@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Venue < ApplicationRecord
   has_many :seats, dependent: :delete_all
   validates :rows, presence: true, numericality: { greater_than: 0 }
@@ -8,7 +10,7 @@ class Venue < ApplicationRecord
     row = rand(rows) + 1
     start_column = rand(columns - size) + 1
     end_column = start_column + size
-    seats.where(row: row, column: start_column...end_column).update_all available: true
+    seats.where(row: row, column: start_column...end_column).update_all available: true # rubocop:disable Rails/SkipsModelValidations
   end
 
   # output is 0-indexed, inputs are 1-indexed
@@ -25,6 +27,6 @@ class Venue < ApplicationRecord
         seat_attributes << { venue_id: id, row: row, column: column, available: false }
       end
     end
-    Seat.insert_all! seat_attributes
+    Seat.insert_all! seat_attributes # rubocop:disable Rails/SkipsModelValidations
   end
 end
