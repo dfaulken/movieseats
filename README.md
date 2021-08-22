@@ -68,7 +68,7 @@ $ bundle exec rspec
 
 See [RSpec documentation](https://rspec.info/) for more detailed description of capabilities.
 
-Run the RuboCop ruby linter with:
+Run the RuboCop Ruby linter with:
 ```
 $ bundle exec rails rubocop
 ```
