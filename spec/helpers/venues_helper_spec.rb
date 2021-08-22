@@ -6,9 +6,11 @@ RSpec.describe VenuesHelper do
     let(:seat) { venue.seats.first }
     let(:raw_result) { solution_input_json venue }
     let(:result) { JSON.parse raw_result }
+
     it 'returns JSON' do
       expect { JSON.parse raw_result }.not_to raise_error
     end
+
     it 'gives venue layout data' do
       expect(result).to have_key 'venue'
       expect(result['venue']).to have_key 'layout'
@@ -18,6 +20,7 @@ RSpec.describe VenuesHelper do
       expect(layout).to have_key 'columns'
       expect(layout['columns']).to eq venue.columns
     end
+
     it 'gives seat data' do
       expect(result).to have_key 'seats'
       seats_data = result['seats']
@@ -29,11 +32,13 @@ RSpec.describe VenuesHelper do
       expect(seat_data).to have_key 'status'
       expect(seat_data['status']).to eq seat.status
     end
+
     it 'uses seat name for ID' do
       seat_data = result['seats'][seat.name]
       expect(seat_data).to have_key 'id'
       expect(seat_data['id']).to eq seat.name
     end
+
     it 'uses downcased row letter for seat rows' do
       seat_data = result['seats'][seat.name]
       expect(seat_data).to have_key 'row'

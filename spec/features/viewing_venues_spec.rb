@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.feature 'Viewing venues', type: :feature do
-  scenario 'default' do
+RSpec.describe 'Viewing venues', type: :feature do
+  it 'default' do
     venue = create :venue, rows: 2, columns: 3
     visit "/venues/#{venue.id}"
     expect(page).to have_text "Rows: #{venue.rows}"

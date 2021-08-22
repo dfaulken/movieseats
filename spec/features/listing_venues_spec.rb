@@ -1,11 +1,12 @@
 require 'rails_helper'
 
-RSpec.feature 'Listing venues', type: :feature do
-  scenario 'with no venues present' do
+RSpec.describe 'Listing venues', type: :feature do
+  it 'with no venues present' do
     visit '/venues'
     expect(page).not_to have_css 'table'
   end
-  scenario 'with venues present' do
+
+  it 'with venues present' do
     create :venue
     visit '/venues'
     expect(page).to have_css 'table'

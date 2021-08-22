@@ -2,11 +2,7 @@ class MovieSeatsSolver
   AVAILABLE_STATUS = 'AVAILABLE'.freeze
   ROW_LETTERS = %w[a b c d e f g h i j k l m n o p q r s t u v w x y z].freeze
 
-  attr_accessor :input_data
-  attr_accessor :requested_group_size
-  attr_accessor :venue
-  attr_accessor :seat_groups
-  attr_accessor :best_group
+  attr_accessor :input_data, :requested_group_size, :venue, :seat_groups, :best_group
 
   def parse_input_data!
     venue = Venue.new
@@ -38,7 +34,7 @@ class MovieSeatsSolver
   def solution_json_data
     return {} unless best_group
 
-    input_data['seats'].slice *(best_group.map(&:id))
+    input_data['seats'].slice(*(best_group.map(&:id)))
   end
 
   def solve!
@@ -73,8 +69,7 @@ class MovieSeatsSolver
   end
 
   class Venue
-    attr_accessor :rows
-    attr_accessor :columns
+    attr_accessor :rows, :columns
 
     def center_column_number
       Rational(columns + 1, 2) # e.g. 10 columns -> center column number is (11/2) = 5.5
@@ -88,9 +83,7 @@ class MovieSeatsSolver
   end
 
   class Seat
-    attr_accessor :row
-    attr_accessor :column
-    attr_accessor :id
+    attr_accessor :row, :column, :id
 
     def next_to?(other_seat)
       return false unless other_seat.is_a? Seat

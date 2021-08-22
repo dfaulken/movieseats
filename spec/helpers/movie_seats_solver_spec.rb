@@ -1,11 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe MovieSeatsSolver do
-  let(:solver) { MovieSeatsSolver.new }
+  let(:solver) { described_class.new }
 
   it 'has an available status that is the same as for Seat' do
     expect(MovieSeatsSolver::AVAILABLE_STATUS).to eq Seat::AVAILABLE_STATUS
   end
+
   it 'has 26 row letters' do
     expect(MovieSeatsSolver::ROW_LETTERS.size).to eq 26
   end
@@ -42,6 +43,7 @@ RSpec.describe MovieSeatsSolver do
       expect(seat.column).to eq 1
       expect(seat.id).to eq 'seat_id1'
     end
+
     it 'groups available seats together' do
       solver.input_data = {
         venue: {
@@ -59,6 +61,7 @@ RSpec.describe MovieSeatsSolver do
       solver.parse_input_data!
       expect(solver.seat_groups.count).to eq 1
     end
+
     it 'does not group seats in different rows together' do
       solver.input_data = {
         venue: {
@@ -114,16 +117,18 @@ RSpec.describe MovieSeatsSolver do
   end
 
   describe 'solve!' do
-    before :each do
+    before do
       venue = MovieSeatsSolver::Venue.new
       venue.rows = 3
       venue.columns = 5
       solver.venue = venue
     end
+
     context 'requested group size is 1' do
-      before :each do
+      before do
         solver.requested_group_size = 1
       end
+
       it 'finds the seat that is closest to the front, all other things being equal' do
         seat1 = MovieSeatsSolver::Seat.new
         seat1.row = 1
@@ -143,6 +148,7 @@ RSpec.describe MovieSeatsSolver do
 
         expect(solver.best_group).to eql [seat1]
       end
+
       it 'finds the seat that is closest to the center, all other things being equal' do
         seat1 = MovieSeatsSolver::Seat.new
         seat1.row = 2
@@ -164,9 +170,10 @@ RSpec.describe MovieSeatsSolver do
       end
     end
     context 'requested group size is greater than 1' do
-      before :each do
+      before do
         solver.requested_group_size = 2
       end
+
       it 'discards groups of closer seats if they are too small' do
         seat1 = MovieSeatsSolver::Seat.new
         seat1.row = 1
@@ -186,6 +193,7 @@ RSpec.describe MovieSeatsSolver do
 
         expect(solver.best_group).not_to include seat1
       end
+
       it 'finds the best subgroup of the best group of available seats' do
         seat1 = MovieSeatsSolver::Seat.new
         seat1.row = 3

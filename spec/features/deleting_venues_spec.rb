@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.feature 'Deleting venues', type: :feature do
-  scenario 'default' do
+RSpec.describe 'Deleting venues', type: :feature do
+  it 'default' do
     venue = create :venue
     visit '/venues'
     seat_count = venue.seats.count

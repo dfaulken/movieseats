@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Changing seat status', type: :feature do
-  scenario 'default', js: true do
+  it 'default', js: true do
     venue = create :venue, rows: 3, columns: 3
     seat = venue.seats.where(row: 2, column: 2).first
     visit "/venues/#{venue.id}"

@@ -18,12 +18,6 @@ Lint/AmbiguousBlockAssociation:
   Exclude:
     - 'spec/features/creating_venues_spec.rb'
 
-# Offense count: 1
-# Cop supports --auto-correct.
-Lint/AmbiguousOperator:
-  Exclude:
-    - 'app/helpers/movie_seats_solver.rb'
-
 # Offense count: 3
 # Configuration parameters: IgnoredMethods, CountRepeatedAttributes.
 Metrics/AbcSize:
@@ -50,24 +44,6 @@ Metrics/MethodLength:
 Metrics/PerceivedComplexity:
   Max: 9
 
-# Offense count: 1
-# Cop supports --auto-correct.
-RSpec/Capybara/CurrentPathExpectation:
-  Exclude:
-    - 'spec/features/creating_venues_spec.rb'
-
-# Offense count: 13
-# Cop supports --auto-correct.
-# Configuration parameters: EnabledMethods.
-RSpec/Capybara/FeatureMethods:
-  Exclude:
-    - 'spec/features/changing_seat_status_spec.rb'
-    - 'spec/features/creating_venues_spec.rb'
-    - 'spec/features/deleting_venues_spec.rb'
-    - 'spec/features/listing_venues_spec.rb'
-    - 'spec/features/testing_solution_spec.rb'
-    - 'spec/features/viewing_venues_spec.rb'
-
 # Offense count: 4
 # Configuration parameters: Prefixes.
 # Prefixes: when, with, without
@@ -75,43 +51,9 @@ RSpec/ContextWording:
   Exclude:
     - 'spec/helpers/movie_seats_solver_spec.rb'
 
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: SkipBlocks, EnforcedStyle.
-# SupportedStyles: described_class, explicit
-RSpec/DescribedClass:
-  Exclude:
-    - 'spec/helpers/movie_seats_solver_spec.rb'
-
-# Offense count: 17
-# Cop supports --auto-correct.
-# Configuration parameters: AllowConsecutiveOneLiners.
-RSpec/EmptyLineAfterExample:
-  Exclude:
-    - 'spec/features/creating_venues_spec.rb'
-    - 'spec/features/listing_venues_spec.rb'
-    - 'spec/features/testing_solution_spec.rb'
-    - 'spec/helpers/movie_seats_solver_spec.rb'
-    - 'spec/helpers/venues_helper_spec.rb'
-    - 'spec/models/seat_spec.rb'
-
 # Offense count: 2
 # Cop supports --auto-correct.
 RSpec/EmptyLineAfterExampleGroup:
-  Exclude:
-    - 'spec/helpers/movie_seats_solver_spec.rb'
-
-# Offense count: 3
-# Cop supports --auto-correct.
-RSpec/EmptyLineAfterFinalLet:
-  Exclude:
-    - 'spec/features/testing_solution_spec.rb'
-    - 'spec/helpers/venues_helper_spec.rb'
-    - 'spec/models/venue_spec.rb'
-
-# Offense count: 3
-# Cop supports --auto-correct.
-RSpec/EmptyLineAfterHook:
   Exclude:
     - 'spec/helpers/movie_seats_solver_spec.rb'
 
@@ -119,21 +61,6 @@ RSpec/EmptyLineAfterHook:
 # Configuration parameters: CountAsOne.
 RSpec/ExampleLength:
   Max: 26
-
-# Offense count: 2
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: method_call, block
-RSpec/ExpectChange:
-  Exclude:
-    - 'spec/features/creating_venues_spec.rb'
-
-# Offense count: 3
-# Cop supports --auto-correct.
-# Configuration parameters: .
-# SupportedStyles: implicit, each, example
-RSpec/HookArgument:
-  EnforcedStyle: each
 
 # Offense count: 26
 RSpec/MultipleExpectations:
@@ -159,14 +86,6 @@ Rails/FilePath:
 Rails/SkipsModelValidations:
   Exclude:
     - 'app/models/venue.rb'
-
-# Offense count: 10
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: separated, grouped
-Style/AccessorGrouping:
-  Exclude:
-    - 'app/helpers/movie_seats_solver.rb'
 
 # Offense count: 12
 # Configuration parameters: AllowedConstants.
