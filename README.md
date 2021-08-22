@@ -66,6 +66,11 @@ $ bundle exec rspec
 
 See [RSpec documentation](https://rspec.info/) for more detailed description of capabilities.
 
+Run the RuboCop ruby linter with:
+```
+$ bundle exec rails rubocop
+```
+
 ## Design
 
 + Two models, `Venue` and `Seat`, represent the basic entities. Basic validation and dependent-object handling is all that this use case calls for.
