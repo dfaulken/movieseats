@@ -18,11 +18,11 @@ RSpec.describe 'Seat', type: :model do
   end
 
   describe 'row_letter' do
-  	it 'gives single letters for rows 1-26' do
-      expect(create(:seat, row:  1).row_letter).to eq 'A'
+    it 'gives single letters for rows 1-26' do
+      expect(create(:seat, row: 1).row_letter).to eq 'A'
       expect(create(:seat, row: 26).row_letter).to eq 'Z'
     end
-  	it 'gives double letters for rows 27-52' do
+    it 'gives double letters for rows 27-52' do
       expect(create(:seat, row: 27).row_letter).to eq 'AA'
       expect(create(:seat, row: 52).row_letter).to eq 'ZZ'
     end

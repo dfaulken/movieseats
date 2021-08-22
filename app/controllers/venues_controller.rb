@@ -90,16 +90,17 @@ class VenuesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_venue
-      @venue = Venue.includes(:seats).find(params[:id])
-    end
 
-    def solution_params
-      params.require(:venue).permit(:input_data, :requested_group_size)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_venue
+    @venue = Venue.includes(:seats).find(params[:id])
+  end
 
-    def venue_params
-      params.require(:venue).permit(:rows, :columns)
-    end
+  def solution_params
+    params.require(:venue).permit(:input_data, :requested_group_size)
+  end
+
+  def venue_params
+    params.require(:venue).permit(:rows, :columns)
+  end
 end

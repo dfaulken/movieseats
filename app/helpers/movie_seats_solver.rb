@@ -1,5 +1,4 @@
 class MovieSeatsSolver
-
   AVAILABLE_STATUS = 'AVAILABLE'.freeze
   ROW_LETTERS = %w[a b c d e f g h i j k l m n o p q r s t u v w x y z].freeze
 
@@ -15,7 +14,7 @@ class MovieSeatsSolver
     venue.rows = layout.fetch('rows')
     venue.columns = layout.fetch('columns')
     self.venue = venue
-    
+
     seat_groups = []
     seats_data = input_data.fetch('seats').values
     seats_data.each do |seat_data|
@@ -38,6 +37,7 @@ class MovieSeatsSolver
 
   def solution_json_data
     return {} unless best_group
+
     input_data['seats'].slice *(best_group.map(&:id))
   end
 
@@ -96,6 +96,7 @@ class MovieSeatsSolver
       return false unless other_seat.is_a? Seat
       return false unless other_seat.row == row
       return false unless (other_seat.column - column).abs == 1
+
       return true
     end
   end
