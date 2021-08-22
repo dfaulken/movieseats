@@ -17,14 +17,6 @@ RSpec.describe 'Seat', type: :model do
     expect(Seat::LETTERS.count).to eq 26
   end
 
-  describe 'at (scope)' do
-    it 'gives a collection of seats with the specified row and column' do
-      venue = create :venue, rows: 3, columns: 4
-      seat = venue.seats.where(row: 2, column: 3).first
-      expect(venue.seats.at 2, 3).to include seat
-    end
-  end
-
   describe 'row_letter' do
   	it 'gives single letters for rows 1-26' do
       expect(create(:seat, row:  1).row_letter).to eq 'A'
