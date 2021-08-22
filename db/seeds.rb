@@ -1,7 +1,11 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+row_values = 10.upto(20).to_a
+column_values = 20.upto(50).to_a
+
+10.times do
+  venue = Venue.create rows: row_values.sample, columns: column_values.sample
+  1.upto(venue.columns / 3).each do |n|
+    (venue.seats.count / 100).times do
+      venue.free_sample_seat_group size: n
+    end
+  end
+end

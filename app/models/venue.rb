@@ -1,5 +1,5 @@
 class Venue < ApplicationRecord
-	has_many :seats, dependent: :destroy
+	has_many :seats, dependent: :delete_all
 	validates :rows, presence: true, numericality: { greater_than: 0 }
 	validates :columns, presence: true, numericality: { greater_than: 0 }
 	after_create :populate_seats!

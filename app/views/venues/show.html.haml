@@ -16,5 +16,11 @@
           = form_with scope: seat, url: update_seat_venue_path(@venue) do |form|
             = form.hidden_field :id, value: seat.id
             = form.check_box :available, value: seat.available?, onchange: 'this.form.submit();'
+= form_with scope: @venue, url: free_sample_seat_group_venue_path(@venue), method: :post do |form|
+  = form.label :group_size, 'Free sample groups of size:'
+  = form.number_field :group_size, value: 1, min: 1, max: @venue.columns
+  = form.label :count, 'Number of groups:'
+  = form.number_field :count, value: 1, min: 1, max: 100
+  = form.submit 'Free group'
 .solution_test= link_to 'Test Solution', test_solution_venue_path(@venue)
 = link_to 'Back', venues_path

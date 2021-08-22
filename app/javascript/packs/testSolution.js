@@ -1,4 +1,4 @@
-$(function(){
+$(document).on('turbolinks:load', function(){
 	const solutionForm = $('form.solution_form');
 	const solutionField = $('textarea.solution_field');
 	solutionForm.on('ajax:success', fillSolution);

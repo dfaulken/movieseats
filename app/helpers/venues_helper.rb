@@ -9,4 +9,9 @@ module VenuesHelper
 		end
 		data.to_json
 	end
+
+	def percentage_available_seats(venue)
+		percentage = 100 * venue.seats.available.count / venue.seats.count.to_f
+		'%.2f%%' % percentage
+	end
 end

@@ -1,9 +1,12 @@
 class VenuesController < ApplicationController
-  before_action :set_venue, only: %i[ show edit update destroy update_seat test_solution ]
+  before_action :set_venue, only: %i[
+    show edit update destroy update_seat
+    test_solution free_sample_seat_group
+  ]
 
   # GET /venues or /venues.json
   def index
-    @venues = Venue.all
+    @venues = Venue.includes(:seats).all
   end
 
   # GET /venues/1 or /venues/1.json
@@ -65,6 +68,16 @@ class VenuesController < ApplicationController
     end
   end
 
+  def free_sample_seat_group
+    free_params = params.require(:venue).permit(:group_size, :count)
+    group_size = free_params.fetch(:group_size).to_i
+    count = [free_params.fetch(:count).to_i, 100].min
+    count.times do
+      @venue.free_sample_seat_group size: group_size
+    end
+    redirect_to @venue, notice: 'Sample seat group(s) freed.'
+  end
+
   def test_solution
     if request.post?
       solver = MovieSeatsSolver.new
@@ -86,7 +99,6 @@ class VenuesController < ApplicationController
       params.require(:venue).permit(:input_data, :requested_group_size)
     end
 
-    # Only allow a list of trusted parameters through.
     def venue_params
       params.require(:venue).permit(:rows, :columns)
     end

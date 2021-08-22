@@ -52,6 +52,7 @@ Recommended testing steps include:
 
 1. Create a venue with a non-trivial number of rows and columns.
 1. View that venue and check boxes next to the seats to mark them as available. Seats are unavailable by default.
+  + Or, quickly create a few sample venues with seat groups of various sizes free with `bundle exec rails db:seed`.
 1. Go to 'Test Solution' for a venue. This shows the JSON data that will be input to the standalone solution class.
 1. Click 'Test Solution'. This will send that JSON data to the solution class via a dedicated controller method. The solution class's output will be displayed as-is in the lower text area.
 
