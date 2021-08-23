@@ -2,7 +2,7 @@
 
 Rails.application.routes.draw do
   root to: 'venues#index'
-  resources :venues do
+  resources :venues, except: %i[ edit update ] do
     member do
       get  :test_solution
       post :test_solution

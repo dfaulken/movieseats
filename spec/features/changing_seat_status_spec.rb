@@ -10,4 +10,6 @@ RSpec.describe 'Changing seat status', type: :feature do
     page.find('td', text: seat.name).find('form').find('input[type=checkbox]').click
     expect(page).to have_css('#notice', text: 'Seat updated.')
   end
+
+  it 'handles errors'
 end

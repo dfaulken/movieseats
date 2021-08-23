@@ -2,7 +2,7 @@
 
 class VenuesController < ApplicationController
   before_action :set_venue, only: %i[
-    show edit update destroy update_seat
+    show destroy update_seat
     test_solution free_sample_seat_group
   ]
 
@@ -19,9 +19,6 @@ class VenuesController < ApplicationController
     @venue = Venue.new
   end
 
-  # GET /venues/1/edit
-  def edit; end
-
   # POST /venues or /venues.json
   def create
     @venue = Venue.new(venue_params)
@@ -32,19 +29,6 @@ class VenuesController < ApplicationController
         format.json { render :show, status: :created, location: @venue }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @venue.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /venues/1 or /venues/1.json
-  def update
-    respond_to do |format|
-      if @venue.update(venue_params)
-        format.html { redirect_to @venue, notice: 'Venue was successfully updated.' }
-        format.json { render :show, status: :ok, location: @venue }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @venue.errors, status: :unprocessable_entity }
       end
     end
