@@ -11,8 +11,9 @@ The Rails app has the following features:
 + Small [jQuery component](/app/javascript/packs/testSolution.js) to handle submitting solution input and displaying solution output via AJAX
 + Complete [model](/spec/models), [helper](/spec/helpers), and [feature](/spec/features) testing written in RSpec with Capybara and FactoryBot
 + Ruby style linting with RuboCop
++ Code coverage analysis with SimpleCov
 
-Other skills which I have aimed to demonstrate in this project:
+Other skills or best practices which I have aimed to demonstrate in this project:
 
 + GitHub [issue tracking](https://github.com/dfaulken/movieseats/issues) and [project management](https://github.com/dfaulken/movieseats/projects/1)
 + [In-code documentation](https://github.com/dfaulken/movieseats/blob/8e2b2f69333cbf3e80b7cd4f567eae66860442bc/app/helpers/movie_seats_solver.rb#L45-L48) of low-level design decisions
@@ -20,7 +21,7 @@ Other skills which I have aimed to demonstrate in this project:
 
 ## Dependencies
 
-1. Ruby >2.3 (I believe that the newest Ruby feature that I use is the safe navigation operator `&.`)
+1. Ruby >2.3 (I believe that the newest Ruby feature thatI  use is the safe navigation operator `&.`)
 1. Bundler gem installed in your Ruby version of choice
 1. PostgreSQL server
 1. Node.js (for npm)
