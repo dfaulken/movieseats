@@ -67,10 +67,6 @@ class MovieSeatsSolver
   end
 
   def size_seat_groups!
-    # Mapping larger groups to all sub-groups of requested size
-    # (and discarding groups of insufficient size)
-    # could be done as part of the first iteration.
-    # This is a refactor target if more efficiency is needed.
     requested_size_groups = []
     seat_groups.each do |group|
       unless group.size < requested_group_size
