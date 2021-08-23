@@ -34,3 +34,7 @@
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+
+/coverage/assets
+/coverage/.resultset.*
+/coverage/index.html

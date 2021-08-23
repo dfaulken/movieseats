@@ -33,6 +33,7 @@ group :test do
   gem 'rubocop-rspec', '~> 2.4'
   gem 'selenium-webdriver'
   gem 'webdrivers'
+  gem 'simplecov', '~> 0.21'
 end
 
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
